@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Book
     private $bookDate;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trade", mappedBy="book", orphanRemoval=true)
+     */
+    private $bookTrades;
+
+    public function __construct()
+    {
+        $this->bookTrades = new ArrayCollection();
+    }
+
+    /**
      * Permet d'initialiser le slug
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -56,6 +68,19 @@ class Book
         if(empty($this->slug)) {
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->title);
+        }
+    }
+    
+    /**
+     * Permet d'initialiser le slug
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @return void
+     */
+    public function initializeBookDate(){
+        if(empty($this->bookDate)) {
+            $this->bookDate = new \DateTime() ;
         }
     }
 
@@ -123,4 +148,47 @@ class Book
 
         return $this;
     }
+
+    /**
+     * @return Collection|Trade[]
+     */
+    public function getBookTrades(): Collection
+    {
+        return $this->bookTrades;
+    }
+
+    public function getBookProfit():float 
+    {
+        $trades = $this->bookTrades;
+        $bookProfit = 0;
+        foreach($trades as $trade){
+            $bookProfit += $trade->getProfit();
+        }
+
+        return $bookProfit;
+    }
+
+    public function addBookTrade(Trade $bookTrade): self
+    {
+        if (!$this->bookTrades->contains($bookTrade)) {
+            $this->bookTrades[] = $bookTrade;
+            $bookTrade->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookTrade(Trade $bookTrade): self
+    {
+        if ($this->bookTrades->contains($bookTrade)) {
+            $this->bookTrades->removeElement($bookTrade);
+            // set the owning side to null (unless already changed)
+            if ($bookTrade->getBook() === $this) {
+                $bookTrade->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

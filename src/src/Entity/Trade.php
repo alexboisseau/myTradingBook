@@ -37,7 +37,7 @@ class Trade
     private $exitPrice;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $comment;
 
@@ -45,6 +45,17 @@ class Trade
      * @ORM\Column(type="float")
      */
     private $lots;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $profit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book", inversedBy="bookTrades")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
 
     public function getId(): ?int
     {
@@ -104,7 +115,7 @@ class Trade
         return $this->comment;
     }
 
-    public function setComment(string $comment): self
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
 
@@ -119,6 +130,30 @@ class Trade
     public function setLots(float $lots): self
     {
         $this->lots = $lots;
+
+        return $this;
+    }
+
+    public function getProfit(): ?float
+    {
+        return $this->profit;
+    }
+
+    public function setProfit(float $profit): self
+    {
+        $this->profit = $profit;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

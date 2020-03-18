@@ -3,19 +3,26 @@
 namespace App\Form;
 
 use App\Entity\Book;
-use Symfony\Component\Form\AbstractType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class BookType extends AbstractType
+class BookType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('marketType')
-            ->add('bookDate')
-            ->add('author')
+            ->add(
+                'title',
+                TextType::class,
+                $this->getConfiguration("Titre","Indiquez le titre de votre nouveau cahier")
+            )
+            ->add(
+                'marketType',
+                TextType::class,
+                $this->getConfiguration("Type de marché","Forex, Cryptomonnaie, etc ...")
+                )
         ;
     }
 

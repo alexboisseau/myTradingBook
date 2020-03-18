@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Mes cahiers
+{% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+        <h1 class="text-center my-4">Mes cahiers de trading 📈</h1>
+
+        <a href="{{ path('book_new') }}" class="btn btn-primary">
+            <i class="fas fa-plus mr-1"></i>
+            Ajouter un cahier
+        </a>
+
+        {% if user.booksUser%}
+            {% for book in user.booksUser %}
+            
+            <div class="row alert alert-light align-items-center shadow my-3">
+                    <div class="col-md-3">
+                        <a href="{{path('book_show', {'slug': book.slug})}}">
+                            <p><strong>{{book.title}}</strong></p>
+                        </a>
+                        <p class="badge badge-success">{{book.marketType}}</p>
+                    </div>
+                    <div class="col-md-4 m-0 p-0">
+                        <a href="{{path('book_delete', {'slug': book.slug})}}" class="text-center p-3">
+                            <i class="fas fa-trash"></i>
+                            Supprimer le cahier
+                        </a>
+                        <a href="{{ path('book_edit', {'slug': book.slug}) }}" class="text-center p-3 ">
+                            <i class="fas fa-pen"></i>
+                            Modifier le cahier
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        {% if book.bookProfit > 0 %}
+                            <div class="badge badge-success ">
+                                <i class="fas fa-wallet mr-2"></i>
+                                Bénéfice total : {{book.bookProfit}} &euro;
+                            </div>
+                        {% else %}
+                            <div class="badge badge-danger ">
+                                <i class="fas fa-wallet mr-2"></i>
+                                Bénéfice total : {{book.bookProfit}} &euro;
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-center">Crée le {{book.bookDate | date('d/m/Y')}}</p>
+                    </div>
+            </div>
+            {% endfor %}
+
+        {% else %}
+            <h2 class="text-center">Vous n'avez pas de cahier !</h2>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

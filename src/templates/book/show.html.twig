@@ -1,31 +1,74 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block title %}
-    Mes cahiers
+    {{book.title}}
 {% endblock %}
 
 {% block body %}
-    
-    <div class="container">
-        <h1 class="text-center my-4">Mes cahiers de trading 📈</h1>
-
-        {% if user.booksUser | length > 0 %}
-            {% for book in user.booksUser %}
-            <div class="row alert alert-light">
-                    <div class="col-md-4">
-                        <p><strong>{{book.title}}</strong></p>
-                        <p class="badge badge-success">{{book.marketType}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#" class="text-center p-3 ">Supprimer le book</a>
-                        <a href="#" class="text-center p-3 ">Modifier le book</a>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="text-center">Crée le {{book.bookDate | date('d/m/Y')}}</p>
-                    </div>
+    <div class="container-fluid">
+        <h1 class="text-center my-5">{{book.title}} 📈</h1>
+        <a href="{{ path('book') }}" class="btn btn-primary m-1">
+            <i class="fas fa-arrow-left"></i>
+            Retour
+        </a>
+        <br>
+        <a href="{{ path('trade_new', {'slug': book.slug}) }}" class="btn btn-primary m-1">
+            <i class="fas fa-plus"></i>
+            Ajouter un trade
+        </a>
+        <table class="table table-hover py-4">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Position</th>
+                    <th>Prix d'entrée</th>
+                    <th>Prix de sortie</th>
+                    <th>Commentaires</th>
+                    <th>Lots</th>
+                    <th>Bénéfices</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trade in book.bookTrades %}
+                    <tr>
+                        <td>{{trade.action}}</td>
+                        <td>{{trade.position}}</td>
+                        <td>{{trade.enterPrice}}</td>
+                        <td>{{trade.exitPrice}}</td>
+                        <td>{{trade.comment}}</td>
+                        <td>{{trade.lots}}</td>
+                        {% if trade.profit > 0 %}
+                            <td class="text-success">{{trade.profit}} &euro;</td>
+                        {% elseif trade.profit < 0 %}
+                            <td class="text-danger">{{trade.profit}} &euro;</td>
+                        {% else %}
+                            <td>{{trade.profit}} &euro;</td>
+                        {% endif %}
+                        <td>                                
+                            <a href="{{ path('trade_delete', {'id': trade.id}) }}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </a>
+                            <a href="{{ path('trade_delete', {'id': trade.id}) }}" class="btn btn-primary">
+                                <i class="fas fa-trash"></i>
+                                Modifier
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if book.bookProfit > 0 %}
+            <div class="badge badge-success ">
+                <i class="fas fa-wallet mr-2"></i>
+                Bénéfice total : {{book.bookProfit}} &euro;
             </div>
-            {% endfor %}
+        {% else %}
+            <div class="badge badge-danger ">
+                <i class="fas fa-wallet mr-2"></i>
+                Bénéfice total : {{book.bookProfit}} &euro;
+            </div>
         {% endif %}
     </div>
-
 {% endblock %}
