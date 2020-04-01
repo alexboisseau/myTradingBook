@@ -33,7 +33,7 @@ class TradeType extends ApplicationType
             ->add(
                 'exitPrice',
                 NumberType::class,
-                $this->getConfiguration("Prix d'entrée","Indiquez le prix de sortie")
+                $this->getConfiguration("Prix de sortie","Indiquez le prix de sortie")
                 )
             ->add(
                 'comment',

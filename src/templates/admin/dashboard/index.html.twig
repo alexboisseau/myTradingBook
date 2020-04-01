@@ -1,0 +1,72 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center my-5">Dashboard Admin</h1>
+        <div class="row" style="margin-top: 150px; margin-bottom: 20px;">
+            <div class="col">
+                <div class="card bg-primary text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-users fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title"> {{stats.users}} utilisateurs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-danger text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-book fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title"> {{stats.books}} books crées</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card bg-warning text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-pen fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title"> {{stats.trades}} trades enregistrés</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-success text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-envelope fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title"> {{stats.messages}} message(s)</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

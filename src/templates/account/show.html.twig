@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Mon compte
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5 text-center">Mon compte 🧑‍💻</h1>
+        <div class="alert alert-light">
+            <div class="row">
+                <div class="col">
+                    <img src="{{ user.picture }}" alt="Avatar de {{user.fullName}}" class="avatar avatar-medium">
+                    <span class="mx-2" style="font-size: 25px;">{{user.fullName}}</span>
+                </div>
+            </div>
+            <div class="row mt-3 ml-1" style="font-size: 20px;">
+                {% if user.userProfit > 0 %}
+                    <div class="badge badge-success ">
+                        <i class="fas fa-wallet mr-2"></i>
+                        Bénéfice total : {{user.userProfit}} &euro;
+                    </div>
+                {% else %}
+                    <div class="badge badge-danger ">
+                        <i class="fas fa-wallet mr-2"></i>
+                        Bénéfice total : {{user.userProfit}} &euro;
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row mt-3 ml-1" style="font-size: 20px;">
+                <div class="badge badge-success ">
+                    <i class="fas fa-book mr-2"></i>
+                    Nombre de cahiers : {{user.booksUser|length}}
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="my-2" style="font-size: 25px;">Description : </p>
+                    {{user.description | raw}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

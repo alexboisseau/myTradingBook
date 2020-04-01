@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Top 3 Crypto 🚀{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5 text-center">Top 3 Crypto 🚀</h1>
+        <div class="row">
+            <div class="col mx-3">
+                <h2 class="my-2">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="Logo Bitcoin" class="mr-2">
+                    Bitcoin (BTC)
+                </h2>
+                <div class="my-5">
+                    <p><span class="font-weight-bold">Prix : </span>5700 &euro;</p>
+                    <p><span class="font-weight-bold">Offre en circulation : </span> 18 294 975 BTC</p>
+                    <p><span class="font-weight-bold">Capitalisation du marché : </span>103 763 901 363 &euro;</p>
+                    <p><span class="font-weight-bold">Variation (24h) : </span> <span class="text-success">1,95%</span></p>
+                </div>
+            </div>
+            <div class="col mx-3">
+                <h2 class="my-2">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="Logo Bitcoin" class="mr-2">
+                    Etherum (ETH)
+                </h2>
+                <div class="my-5">
+                    <p><span class="font-weight-bold">Prix : </span>119 &euro;</p>
+                    <p><span class="font-weight-bold">Offre en circulation : </span>110 308 637 ETH</p>
+                    <p><span class="font-weight-bold">Capitalisation du marché : </span>13 088 381 945 &euro</p>
+                    <p><span class="font-weight-bold">Variation (24h) : </span><span class="text-success">1,36%</span></p>
+                </div>
+            </div>
+            <div class="col mx-3">
+                <h2 class="my-2">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/52.png" alt="Logo Bitcoin" class="mxr2">
+                    Ripple (XRP)
+                </h2>
+                <div class="my-5">
+                    <p><span class="font-weight-bold">Prix : </span>0,155880 &euro;</p>
+                    <p><span class="font-weight-bold">Offre en circulation : </span>43 935 664 307 XRP</p>
+                    <p><span class="font-weight-bold">Capitalisation du marché : </span>4 212 196 958 &euro;</p>
+                    <p><span class="font-weight-bold">Variation (24h) : </span><span class="text-danger">0,03%</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

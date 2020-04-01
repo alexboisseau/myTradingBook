@@ -1,0 +1,33 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+    Messages
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="text-center my-5">Messages 📬</h1>
+        {% for message in messages %}
+            <div class="row my-4 shadow p-4">
+                <div class="col-md-4">
+                    <h4>{{message.object}}</h4>
+                </div>
+                <div class="col-md-4">
+                    <p>De : {{message.lastName}} {{message.firstName}} </p>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <a href="{{ path('show_message', {'id': message.id}) }}" class="btn btn-primary mx-2">
+                        <i class="fas fa-eye"></i>
+                        Consulter
+                    </a>
+                    <a href="{{ path('delete_message', {'id': message.id}) }}" class="btn btn-danger mx-2">
+                        <i class="fas fa-trash"></i>
+                        Supprimer
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

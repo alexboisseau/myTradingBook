@@ -33,10 +33,7 @@ class TradeController extends AbstractController
                 "Le trade <strong>{$trade->getAction()}</strong> a bien été enregistrée !"
             );
 
-            return $this->redirect('/book/show/'.$book->getSlug(),[
-                'trade' => $trade,
-                'book' => $book
-            ]);
+            return $this->redirect('/book/show/'.$book->getId());
         }
         
         return $this->render('trade/new.html.twig',[
@@ -56,6 +53,46 @@ class TradeController extends AbstractController
         $manager->remove($trade);
         $manager->flush();
 
-        return $this->redirectToRoute('book');
+        $this->addFlash(
+            'success',
+            "Le trade <strong>{$trade->getAction()}</strong> a bien été supprimé!"
+        );
+
+        return $this->redirect('/book/show/'.$trade->getBook()->getId());
+    }
+
+    /**
+     * Method to update an existing book
+     * 
+     * @Route("/trade/edit/{id}", name="trade_edit")
+     *
+     * @param Trade $trade
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return void
+     */
+    public function edit(Trade $trade, Request $request, EntityManagerInterface $manager){
+        $form = $this->createForm(TradeType::class, $trade);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            // $book->setAuthor($this->getUser());
+
+            $manager->persist($trade);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le trade <strong>{$trade->getAction()}</strong> a bien été modifié !"
+            );
+
+            return $this->redirect('/book/show/'.$trade->getBook()->getId());
+        }
+        return $this->render('trade/edit.html.twig',[
+            'form' => $form->createView(),
+            'trade' => $trade
+        ]);
     }
 }

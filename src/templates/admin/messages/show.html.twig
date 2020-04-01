@@ -1,0 +1,33 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+    - {{message.object}}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="text-center my-5">{{message.object}}</h1>
+
+        <a href="{{path('admin_message')}}" class="btn btn-primary my-3">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Retour 
+        </a>
+
+        <div class="row">
+            <div class="col">
+                <div class="bg-light rounded p-3 m-3">
+                    <p><strong>Destinataire :</strong> {{message.email}}</p>
+                    <p><strong>Prénom :</strong> {{message.firstName}}</p>
+                    <p><strong>Nom :</strong> {{message.lastName}}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-light rounded p-3 m-3">
+                    <p><strong>Objet du message :</strong> {{message.object}}</p>
+                    <p><strong>Message :</strong> {{message.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

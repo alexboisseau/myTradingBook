@@ -27,7 +27,7 @@ class BookController extends AbstractController
     /**
      * Method to delete book
      * 
-     * @Route("/book/{slug}/delete", name="book_delete")
+     * @Route("/book/{id}/delete", name="book_delete")
      *
      * @param Book $book
      * @param EntityManagerInterface $manager
@@ -83,7 +83,7 @@ class BookController extends AbstractController
     /**
      * Method to update an existing book
      * 
-     * @Route("/book/edit/{slug}", name="book_edit")
+     * @Route("/book/edit/{id}", name="book_edit")
      *
      * @param Book $book
      * @param Request $request
@@ -121,13 +121,12 @@ class BookController extends AbstractController
     /**
      * Method to show all Trade in a book
      * 
-     * @Route("/book/show/{slug}", name="book_show")
+     * @Route("/book/show/{id}", name="book_show")
      *
      * @param Book $book
-     * @param TradeRepository $tradeRepo
      * @return void
      */
-    public function show(Book $book, TradeRepository $tradeRepo){
+    public function show(Book $book){
         return $this->render('book/show.html.twig',[
             "book" => $book
         ]);

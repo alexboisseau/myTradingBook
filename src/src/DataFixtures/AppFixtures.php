@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Book;
+use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Trade;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,23 +23,29 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager){
         $faker = Factory::create('FR-fr');
 
-        // Gestion des utilisateurs
+        // Gestion des variables
         $users = [];
         $genres = ['male','female'];
         $market_type = ['Cryptomonnaie','Indices boursiers','Matières Premières','Forex'];
         $actions = [["BTC/ETH","BTC/MCO",'BTC/CRO'],["CAC40","DAX30","DJ30"],["XAUUSD","OIL","SILVER"],["EUR/USD","USDCAD","CAD/JPY","EUR/JPY","AUDCAD"]];
         $positions = ["Achat","Vente"];
 
+        //Création du role Admin
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
         // Création de mon utilisateur
         $alex = new User();
-        $picture = 'https://randomuser.me/api/portraits/male/10';
+        $picture = 'https://randomuser.me/api/portraits/men/10.jpg';
         $hash = $this->encoder->encodePassword($alex, 'password');
         $alex->setFirstName("Alex")
                 ->setLastName("Boisseau")
                 ->setEmail("alex.boisseau@contact.com")
                 ->setDescription('<p>'.join('</p><p>',$faker->paragraphs(3)).'</p>')
                 ->setHash($hash)
-                ->setPicture($picture);
+                ->setPicture($picture)
+                ->addUserRole($adminRole);
         
         $manager->persist($alex);
         $users[] = $alex;
@@ -100,7 +107,7 @@ class AppFixtures extends Fixture
                         $action = $faker->randomElement($actions[3]);
                     break;
                     default:
-                        $action = "raté";
+                        $action = "error";
                     break;
                 }
                 $position = $faker->randomElement($positions);

@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Nouveau trade
+    Modification du trade {{trade.action}}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center my-4">Ajout d'un nouveau trade 📈</h1>
-        <a href="{{ path('book_show', {'id': book.id}) }}" class="btn btn-primary m-2">
+        <h1 class="text-center my-4">Modification du trade {{trade.action}} 📈</h1>
+        <a href="#" class="btn btn-primary m-2">
             <i class="fas fa-arrow-left"></i>
             Retour
         </a>

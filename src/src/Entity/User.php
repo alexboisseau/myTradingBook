@@ -71,6 +71,7 @@ class User implements UserInterface
      */
     private $booksUser;
 
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -90,6 +91,7 @@ class User implements UserInterface
             $this->slug = $slugify->slugify($this->firstName.' '.$this->lastName);
         }
     }
+    
 
     public function getFullName(){
         return "{$this->firstName} {$this->lastName}";
@@ -247,6 +249,17 @@ class User implements UserInterface
         return $this->booksUser;
     }
 
+    public function getUserProfit(){
+        
+        $profit = 0;
+
+        foreach( $this->booksUser as $book){
+            $profit += $book->getBookProfit();
+        };
+
+        return $profit;
+    }
+
     public function addBooksUser(Book $booksUser): self
     {
         if (!$this->booksUser->contains($booksUser)) {
@@ -269,4 +282,5 @@ class User implements UserInterface
 
         return $this;
     }
+
 }

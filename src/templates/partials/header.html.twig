@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
     <a class="navbar-brand" href="{{path('home')}}">MyTradingBook</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarColor" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{path('home')}}">Home</a>
+                <a class="nav-link" href="{{path('crypto')}}">Top 3 Crypto 🚀</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('contact')}}">Contact</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-3">
@@ -18,8 +21,8 @@
                         {{app.user.fullName}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
-                        <a href="#" class="dropdown-item">Mon compte</a>
-                        <a href="#" class="dropdown-item">Modifier mon profil</a>
+                        <a href="{{path('account')}}" class="dropdown-item">Mon compte</a>
+                        <a href="{{path('edit_account')}}" class="dropdown-item">Modifier mon profil</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{path('book')}}" class="dropdown-item">Mes cahiers</a>
                         <div class="dropdown-divider"></div>
@@ -31,7 +34,7 @@
                     <a href="{{path('account_login')}}" class="nav-link">Connexion</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Inscription</a>
+                    <a href="{{path('account_register')}}" class="nav-link">Inscription</a>
                 </li>
                 
             {% endif %}

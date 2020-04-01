@@ -19,17 +19,17 @@
             
             <div class="row alert alert-light align-items-center shadow my-3">
                     <div class="col-md-3">
-                        <a href="{{path('book_show', {'slug': book.slug})}}">
+                        <a href="{{path('book_show', {'id': book.id})}}">
                             <p><strong>{{book.title}}</strong></p>
                         </a>
                         <p class="badge badge-success">{{book.marketType}}</p>
                     </div>
                     <div class="col-md-4 m-0 p-0">
-                        <a href="{{path('book_delete', {'slug': book.slug})}}" class="text-center p-3">
+                        <a href="{{path('book_delete', {'id': book.id})}}" class="text-center p-3">
                             <i class="fas fa-trash"></i>
                             Supprimer le cahier
                         </a>
-                        <a href="{{ path('book_edit', {'slug': book.slug}) }}" class="text-center p-3 ">
+                        <a href="{{ path('book_edit', {'id': book.id}) }}" class="text-center p-3 ">
                             <i class="fas fa-pen"></i>
                             Modifier le cahier
                         </a>
